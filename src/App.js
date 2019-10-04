@@ -1,8 +1,27 @@
 import React from 'react';
+import ApolloClient, { gql } from 'apollo-boost'
 import logo from './logo.svg';
 import './App.css';
 
+
+
 function App() {
+  const client = new ApolloClient({
+    uri: 'http://localhost:5000/graphql',
+  });
+  client
+  .query({
+    query: gql`
+      {
+        tickets {
+          id,
+          subject
+        }
+      }
+    `
+  })
+  .then(result => console.log(result));
+  
   return (
     <div className="App">
       <header className="App-header">
